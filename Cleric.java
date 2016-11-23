@@ -1,8 +1,7 @@
-/* Jeffrey Lin
- * Team Lin(ChenCuen)-Sanity -- Andrew Chen, Grace Cuenca
+/* Team Lin(ChenCuen)-Sanity -- Andrew Chen, Grace Cuenca, Jeffrey Lin
  * APCS1 period 01
- * HW32 -- Ye Olde Role Playing Game, Expanded
- * 2016-11-18
+ * HW34 -- Ye Olde Role Playing Game, Unchained
+ * 2016-11-22
  */
 
 public class Cleric extends Character {
@@ -28,16 +27,20 @@ public class Cleric extends Character {
         health += (damage * Math.random() * Math.random());
         return damage;
     }
-    
+
     public void normalize(){
-	defense = o_defense;
-	attack = o_attack;
+        defense = o_defense;
+        attack = o_attack;
     }
 
     public void specialize() {
         double rand = (0.5 + (Math.random() * 0.4));
         defense *= rand;
         attack /= rand;
+    }
+
+    public String about() {
+        return "Cleric:\t\tMagical healing abilities add a sliver of health for every bit of\n\t\tdamage they deal.\n";
     }
 }
 

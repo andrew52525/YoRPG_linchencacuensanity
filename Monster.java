@@ -1,8 +1,7 @@
-/* Jeffrey Lin
- * Team Lin(ChenCuen)-Sanity -- Andrew Chen, Grace Cuenca
+/* Team Lin(ChenCuen)-Sanity -- Andrew Chen, Grace Cuenca, Jeffrey Lin
  * APCS1 period 01
- * HW32 -- Ye Olde Role Playing Game, Expanded
- * 2016-11-18
+ * HW34 -- Ye Olde Role Playing Game, Unchained
+ * 2016-11-22
  */
 
 public class Monster extends Character {
@@ -12,6 +11,10 @@ public class Monster extends Character {
         strength *= (Math.random() + 0.3);
         defense *= 0.4;
         attack *= (1.5 + Math.random());
+    }
+
+    public String about() {
+        return "Monster:\tA hideous creature, monsters are deformed humans who seek justice\n\t\tafter being wronged.\n";
     }
 }
 

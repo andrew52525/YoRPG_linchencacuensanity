@@ -27,7 +27,7 @@ public class YoRPG {
     public void newGame() {
         String s;
         String name = "";
-        String _class = "";
+        int _class = 1;
 
         s = "Welcome to Ye Olde RPG!\n";
         s += "\nChoose your difficulty: \n";
@@ -42,19 +42,9 @@ public class YoRPG {
             difficulty = Integer.parseInt( in.readLine() );
         }
         catch ( IOException e ) { }
-        System.out.println("\n");
 
 
-        System.out.println(pat.about());
-        System.out.print("Glorious adventurer, what class doth thy be?\nSelection: ");
-
-        try {
-            _class = in.readLine().toLowerCase();
-        }
-        catch ( IOException e ) { }
-
-
-        s = "Intrepid " + _class +", what doth thy call thyself? (State your name): ";
+        s = "\nIntrepid adventurer, what doth thy call thyself? (State your name): ";
         System.out.print( s );
 
         try {
@@ -62,27 +52,40 @@ public class YoRPG {
         }
         catch ( IOException e ) { }
 
+
+        System.out.println("\nGlorious adventurer, what class doth thy be?\n"
+                + "\t1. Warrior\n"
+                + "\t2. Mage\n"
+                + "\t3. Rogue\n"
+                + "\t4. Barbarian\n"
+                + "\t5. Cleric");
+        System.out.print("Selection: ");
+
+        try {
+            _class = Integer.parseInt(in.readLine());
+        }
+        catch ( IOException e ) { }
+
+
         //instantiate the player's character
-        if ( _class.equals("warrior") ) {
-            System.out.println("Get ready, Warrior " + name + "!");
+        if ( _class == 1 ) {
             pat = new Warrior(name);
         }
-        else if ( _class.equals("mage") ) {
-            System.out.println("Get ready, Mage " + name + "!");
+        else if ( _class == 2 ) {
             pat = new Mage(name);
         }
-        else if ( _class.equals("rogue") ) {
-            System.out.println("Get ready, Rogue " + name + "!");
+        else if ( _class == 3 ) {
             pat = new Rogue(name);
         }
-        else if ( _class.equals("barbarian") ) {
-            System.out.println("Get ready, Barbarian " + name + "!");
+        else if ( _class == 4 ) {
             pat = new Barbarian(name);
         }
-        else if ( _class.equals("cleric") ) {
-            System.out.println("Get ready, Cleric " + name + "!");
+        else if ( _class == 5 ) {
             pat = new Cleric(name);
         }
+
+        System.out.println("\n" + pat.about());
+
     }
 
 

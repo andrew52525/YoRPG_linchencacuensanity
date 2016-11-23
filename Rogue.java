@@ -1,8 +1,7 @@
-/* Jeffrey Lin
- * Team Lin(ChenCuen)-Sanity -- Andrew Chen, Grace Cuenca
+/* Team Lin(ChenCuen)-Sanity -- Andrew Chen, Grace Cuenca, Jeffrey Lin
  * APCS1 period 01
- * HW32 -- Ye Olde Role Playing Game, Expanded
- * 2016-11-18
+ * HW34 -- Ye Olde Role Playing Game, Unchained
+ * 2016-11-22
  */
 
 public class Rogue extends Character {
@@ -20,6 +19,7 @@ public class Rogue extends Character {
     public int attack(Character c) {
         int total = 0;
 
+        // maximum of 7 attacks in one turn
         for ( int i = 0; i < ((Math.random() * 6) + 1); i++ ) {
             int damage = (int) ((strength * attack) - c.getDefense());
             if ( damage < 0 ) {
@@ -34,14 +34,18 @@ public class Rogue extends Character {
     }
 
     public void normalize(){
-	defense = o_defense;
-	attack = o_attack;
+        defense = o_defense;
+        attack = o_attack;
     }
 
     public void specialize() {
         double rand = (0.5 + (Math.random() * 0.4));
         defense *= rand;
         attack /= rand;
+    }
+
+    public String about() {
+        return "Rogue:\t\tIncredibly stealthy, rogues focus on dodging attacks rather than\n\t\twithstanding damage. Can strike multiple times in one turn.\n";
     }
 }
 
