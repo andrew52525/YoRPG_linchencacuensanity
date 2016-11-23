@@ -13,6 +13,9 @@ public class Monster extends Character {
         attack *= (1.5 + Math.random());
     }
 
+    public void normalize() { }
+    public void specialize() { }
+
     public String about() {
         return "Monster:\tA hideous creature, monsters are deformed humans who seek justice\n\t\tafter being wronged.\n";
     }
