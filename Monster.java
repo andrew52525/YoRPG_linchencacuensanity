@@ -13,10 +13,5 @@ public class Monster extends Character {
         defense *= 0.4;
         attack *= (1.5 + Math.random());
     }
-
-    public void normalize(){
-	defense = o_defense;
-	attack = o_attack;
-    }
 }
 

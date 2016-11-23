@@ -53,11 +53,7 @@ public abstract class Character {
         return damage;
     }
  
-    public void specialize() {
-        double rand = (0.5 + (Math.random() * 0.4));
-        defense *= rand;
-        attack /= rand;
-    }
+    public abstract void specialize();
 
     public abstract void normalize();
 

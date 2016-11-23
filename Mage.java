@@ -20,5 +20,11 @@ public class Mage extends Character {
 	defense = o_defense;
 	attack = o_attack;
     }
+    
+    public void specialize() {
+        double rand = (0.5 + (Math.random() * 0.4));
+        defense *= rand;
+        attack /= rand;
+    }
 }
 
