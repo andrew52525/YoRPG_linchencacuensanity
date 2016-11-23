@@ -32,5 +32,10 @@ public class Rogue extends Character {
 
         return total;
     }
+
+    public void normalize(){
+	defense = o_defense;
+	attack = o_attack;
+    }
 }
 

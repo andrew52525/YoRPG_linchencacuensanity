@@ -15,5 +15,10 @@ public class Warrior extends Character {
         o_defense = defense;
         o_attack = attack;
     }
+
+    public void normalize(){
+	defense = o_defense;
+	attack = o_attack;
+    }
 }
 

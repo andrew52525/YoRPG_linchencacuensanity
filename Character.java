@@ -1,11 +1,11 @@
 /* Jeffrey Lin
  * Team Lin(ChenCuen)-Sanity -- Andrew Chen, Grace Cuenca
  * APCS1 period 01
- * HW32 -- Ye Olde Role Playing Game, Expanded
+ * HW34 -- Ye Olde Role Playing Game, Unchained
  * 2016-11-18
  */
 
-public class Character {
+public abstract class Character {
     protected String name;
     protected int health;
     protected int strength;
@@ -59,10 +59,11 @@ public class Character {
         attack /= rand;
     }
 
-    public void normalize() {
-        defense = o_defense;
-        attack = o_attack;
-    }
+    public abstract void normalize();
+    // {
+    //     defense = o_defense;
+    //     attack = o_attack;
+    // }
 
     public static final String about() {
         return "Warrior:\tSkilled in combat, warriors use expensive weaponry in conjunction\n\t\twith heavy armor, making them well-rounded physical combatants.\n"

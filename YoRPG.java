@@ -54,7 +54,7 @@ public class YoRPG {
         catch ( IOException e ) { }
 
 
-        s = "Intrepid warrior, what doth thy call thyself? (State your name): ";
+        s = "Intrepid " + _class +", what doth thy call thyself? (State your name): ";
         System.out.print( s );
 
         try {

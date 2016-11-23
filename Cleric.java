@@ -28,5 +28,10 @@ public class Cleric extends Character {
         health += (damage * Math.random() * Math.random());
         return damage;
     }
+    
+    public void normalize(){
+	defense = o_defense;
+	attack = o_attack;
+    }
 }
 
