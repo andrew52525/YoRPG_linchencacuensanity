@@ -60,10 +60,6 @@ public abstract class Character {
     }
 
     public abstract void normalize();
-    // {
-    //     defense = o_defense;
-    //     attack = o_attack;
-    // }
 
     public static final String about() {
         return "Warrior:\tSkilled in combat, warriors use expensive weaponry in conjunction\n\t\twith heavy armor, making them well-rounded physical combatants.\n"
