@@ -52,7 +52,7 @@ public abstract class Character {
         c.lowerHP(damage);
         return damage;
     }
-
+ 
     public void specialize() {
         double rand = (0.5 + (Math.random() * 0.4));
         defense *= rand;
