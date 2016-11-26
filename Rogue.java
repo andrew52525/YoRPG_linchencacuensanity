@@ -26,10 +26,16 @@ public class Rogue extends Character {
                 damage = 0;
             }
 
-            c.lowerHP(damage);
             total += damage;
         }
 
+        if ( total > c.getHealth() ) {
+            total = c.getHealth();
+        }
+
+        moves++;
+        damage_dealt += total;
+        c.lowerHP(total);
         return total;
     }
 

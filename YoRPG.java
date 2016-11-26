@@ -3,13 +3,16 @@ import java.util.*;
 
 public class YoRPG {
     //change this constant to set number of encounters in a game
+    private static int encounters = 0;
+    private static int explored = 0;
     public final static int MAX_ENCOUNTERS = 5;
-    private Character pat = new Warrior("Warrior");
+    public final static int MAX_EXPLORES = 10;
+    private static Character pat = new Warrior("Warrior");
     private Monster smaug;
 
     private int moveCount;
     private boolean gameOver;
-    private int difficulty;
+    private int difficulty = 1;
 
     private InputStreamReader isr;
     private BufferedReader in;
@@ -26,7 +29,7 @@ public class YoRPG {
 
     public void newGame() {
         String s;
-        String name = "";
+        String name = "pat";
         int _class = 1;
 
         s = "Welcome to Ye Olde RPG!\n";
@@ -34,7 +37,7 @@ public class YoRPG {
         s += "\t1: Easy\n";
         s += "\t2: Not so easy\n";
         s += "\t3: Beowulf hath nothing on me. Bring it on.\n";
-        s += "Selection: ";
+        s += "Selection [1]: ";
         System.out.print( s );
 
 
@@ -44,7 +47,7 @@ public class YoRPG {
         catch ( IOException e ) { }
 
 
-        s = "\nIntrepid adventurer, what doth thy call thyself? (State your name): ";
+        s = "\nIntrepid adventurer, what doth thy call thyself? [pat]: ";
         System.out.print( s );
 
         try {
@@ -59,7 +62,7 @@ public class YoRPG {
                 + "\t3. Rogue\n"
                 + "\t4. Barbarian\n"
                 + "\t5. Cleric");
-        System.out.print("Selection: ");
+        System.out.print("Selection [1]: ");
 
         try {
             _class = Integer.parseInt(in.readLine());
@@ -88,6 +91,44 @@ public class YoRPG {
 
     }
 
+    // Given the correct inputs, returns:
+    // left1    right1
+    // left2    right2
+    // where "    " is at least minimum large
+    // TODO Is there a cleaner way to do this?
+    public String spaceGenerator(int i) {
+        String retStr = "";
+
+        for ( ; i > 0; i-- ) {
+            retStr += " ";
+        }
+
+        return retStr;
+    }
+
+    public String properSpacing(String left1, String right1, String left2, String right2, int minimum) {
+        int longerL = 0;
+        int longerR = 0;
+        String min = spaceGenerator(minimum);
+
+        if ( left1.length() > left2.length() ) {
+            left2 += spaceGenerator( left1.length() - left2.length() );
+        } else {
+            left1 += spaceGenerator( left2.length() - left1.length() );
+        }
+
+        left1 += min;
+        left2 += min;
+
+        if ( right1.length() > right2.length() ) {
+            left2 += spaceGenerator( right1.length() - right2.length() );
+        } else {
+            left1 += spaceGenerator( right2.length() - right1.length() );
+        }
+
+        return left1 + right1 + "\n" + left2 + right2;
+    }
+
 
     public boolean playTurn() {
         int i = 1;
@@ -99,14 +140,14 @@ public class YoRPG {
             System.out.println( "\nLo, yonder monster approacheth!" );
 
             smaug = new Monster();
+            encounters++;
 
             while( smaug.isAlive() && pat.isAlive() ) {
-
                 // Give user the option of using a special attack:
                 // If you land a hit, you incur greater damage,
                 // ...but if you get hit, you take more damage.
                 try {
-                    System.out.println( "\nDo you feel lucky?" );
+                    System.out.println( "\nDo you feel lucky? [1]" );
                     System.out.println( "\t1: Nay.\n\t2: Aye!" );
                     i = Integer.parseInt( in.readLine() );
                 }
@@ -121,18 +162,22 @@ public class YoRPG {
                 d2 = smaug.attack( pat );
 
                 System.out.println( "\n" + pat.getName() + " dealt " + d1 + " points of damage.");
-
                 System.out.println( "Ye Olde Monster smacked " + pat.getName() + " for " + d2 + " points of damage.\n");
 
-                System.out.println(pat.getName() + "'s health:\t\t\t" + pat.getHealth());
-                System.out.println("Ye Olde Monster's health:\t" + smaug.getHealth());
+                System.out.println(
+                        properSpacing(
+                            pat.getName() + "'s health:",
+                            Integer.toString(pat.getHealth()),
+                            "Ye Olde Monster's health:",
+                            Integer.toString(smaug.getHealth()),
+                            5));
             }
 
             //option 1: you & the monster perish
             if ( !smaug.isAlive() && !pat.isAlive() ) {
-                System.out.println( "'Twas an epic battle, to be sure... " +
+                System.out.println( "\n'Twas an epic battle, to be sure... " +
                         "You cut ye olde monster down, but " +
-                        "with its dying breath ye olde monster. " +
+                        "with its dying breath ye olde monster " +
                         "laid a fatal blow upon thy skull." );
                 return false;
             }
@@ -143,7 +188,7 @@ public class YoRPG {
             }
             //option 3: the beast slays you
             else if ( !pat.isAlive() ) {
-                System.out.println( "Ye olde self hath expired. You got dead." );
+                System.out.println( "\nYe olde self hath expired. You got dead." );
                 return false;
             }
         }
@@ -155,15 +200,42 @@ public class YoRPG {
     public static void main( String[] args ) {
         YoRPG game = new YoRPG();
 
-        int encounters = 0;
-        while( encounters < MAX_ENCOUNTERS ) {
+        while( explored < MAX_EXPLORES && encounters < MAX_ENCOUNTERS ) {
             if ( !game.playTurn() )
                 break;
-            encounters++;
+            explored++;
             System.out.println();
         }
 
-        System.out.println( "Thy game doth be over." );
+        String alive = "";
+        if ( pat.isAlive() ) {
+            alive = "won";
+        } else {
+            alive = "died";
+        }
+
+        String beasts = " beast";
+        if ( encounters > 1 ) {
+            beasts += "s";
+        }
+
+        String moves = " move";
+        if ( pat.moves > 1 ) {
+            moves += "s";
+        }
+
+        int score = ( pat.damage_dealt * encounters ) + explored / pat.moves;
+        if ( pat.isAlive() ) {
+            score *= 2;
+        }
+
+        System.out.println("\nYe " + alive + " after dealing "
+                + pat.damage_dealt + " damage to " + encounters + beasts
+                + " while exploring " + explored + " locations in " + pat.moves
+                + moves + ".");
+
+        System.out.println("Final score: " + score);
+        System.out.println( "\nThy game doth be over." );
     }
 }
 

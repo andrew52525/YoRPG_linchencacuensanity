@@ -23,8 +23,16 @@ public class Cleric extends Character {
             damage = 0;
         }
 
-        c.lowerHP(damage);
+        if ( damage > c.getHealth() ) {
+            damage = c.getHealth();
+        }
+
+        // clerics heal a little
         health += (damage * Math.random() * Math.random());
+
+        moves++;
+        damage_dealt += damage;
+        c.lowerHP(damage);
         return damage;
     }
 

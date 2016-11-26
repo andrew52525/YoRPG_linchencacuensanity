@@ -15,3 +15,9 @@ Team *Lin(ChenCacuen)Sanity*'s implementation of a Role-Playing Game.
 - **Cleric**: A fake doctor.
 
 - **Rogue**: A loser. Pronounced [ro-gai].
+
+## How to Play
+
+Choose a difficulty, a name, and a character.  
+Every time it's your turn to fight, you can choose if you want to specialize.  
+At the end, your score is calculated.

@@ -11,8 +11,12 @@ public abstract class Character {
     protected int defense;
     protected double attack;
     protected double stealth;
+
     protected int o_defense = defense;
     protected double o_attack = attack;
+
+    protected int damage_dealt;
+    protected int moves;
 
     public Character(String n) {
         name = n;
@@ -48,6 +52,12 @@ public abstract class Character {
             damage = 0;
         }
 
+        if ( damage > c.getHealth() ) {
+            damage = c.getHealth();
+        }
+
+        moves++;
+        damage_dealt += damage;
         c.lowerHP(damage);
         return damage;
     }
