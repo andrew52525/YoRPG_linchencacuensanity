@@ -5,21 +5,16 @@
  */
 
 public abstract class Character {
-    protected String name;
     protected int health;
     protected int strength;
     protected int defense;
     protected double attack;
     protected double stealth;
 
-    protected int o_defense = defense;
-    protected double o_attack = attack;
-
     protected int damage_dealt;
     protected int moves;
 
-    public Character(String n) {
-        name = n;
+    public Character() {
         health = 200;
         strength = 100;
         defense = 100;
@@ -28,10 +23,6 @@ public abstract class Character {
 
     public boolean isAlive() {
         return health > 0;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getDefense() {

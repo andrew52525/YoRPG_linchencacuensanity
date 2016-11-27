@@ -4,7 +4,7 @@
  * 2016-11-22
  */
 
-public class Warrior extends Character {
+public class Warrior extends Player {
     public Warrior(String n) {
         super(n);
         health *= 1.00;
@@ -13,17 +13,6 @@ public class Warrior extends Character {
         attack *= 1.2;
         o_defense = defense;
         o_attack = attack;
-    }
-
-    public void normalize(){
-        defense = o_defense;
-        attack = o_attack;
-    }
-
-    public void specialize() {
-        double rand = (0.5 + (Math.random() * 0.4));
-        defense *= rand;
-        attack /= rand;
     }
 
     public String about() {

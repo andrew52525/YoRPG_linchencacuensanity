@@ -4,7 +4,7 @@
  * 2016-11-22
  */
 
-public class Barbarian extends Character {
+public class Barbarian extends Player {
     public Barbarian(String n) {
         super(n);
         health *= 1.5;
@@ -14,17 +14,6 @@ public class Barbarian extends Character {
         stealth *= 0.5;
         o_defense = defense;
         o_attack = attack;
-    }
-
-    public void normalize() {
-        defense = o_defense;
-        attack = o_attack;
-    }
-
-    public void specialize() {
-        double rand = (0.5 + (Math.random() * 0.4));
-        defense *= rand;
-        attack /= rand;
     }
 
     public String about() {

@@ -4,7 +4,7 @@
  * 2016-11-22
  */
 
-public class Cleric extends Character {
+public class Cleric extends Player {
     public Cleric(String n) {
         super(n);
         health *= 0.9;
@@ -34,17 +34,6 @@ public class Cleric extends Character {
         damage_dealt += damage;
         c.lowerHP(damage);
         return damage;
-    }
-
-    public void normalize(){
-        defense = o_defense;
-        attack = o_attack;
-    }
-
-    public void specialize() {
-        double rand = (0.5 + (Math.random() * 0.4));
-        defense *= rand;
-        attack /= rand;
     }
 
     public String about() {

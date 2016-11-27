@@ -4,7 +4,7 @@
  * 2016-11-22
  */
 
-public class Rogue extends Character {
+public class Rogue extends Player {
     public Rogue(String n) {
         super(n);
         health *= 0.5;
@@ -37,17 +37,6 @@ public class Rogue extends Character {
         damage_dealt += total;
         c.lowerHP(total);
         return total;
-    }
-
-    public void normalize(){
-        defense = o_defense;
-        attack = o_attack;
-    }
-
-    public void specialize() {
-        double rand = (0.5 + (Math.random() * 0.4));
-        defense *= rand;
-        attack /= rand;
     }
 
     public String about() {

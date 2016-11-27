@@ -6,7 +6,7 @@
 
 public class Monster extends Character {
     public Monster() {
-        super("Monster");
+        super();
         health *= 0.5;
         strength *= (Math.random() + 0.3);
         defense *= 0.4;
