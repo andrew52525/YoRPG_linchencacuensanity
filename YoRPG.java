@@ -9,7 +9,7 @@ public class YoRPG {
     public final static int MAX_EXPLORES = 10;
     private static Player pat;
     private Monster smaug;
-	int _class = 1;
+    int _class = 1;
 
     private int moveCount;
     private boolean gameOver;
@@ -44,16 +44,20 @@ public class YoRPG {
         try {
             difficulty = Integer.parseInt( in.readLine() );
         }
-        catch ( IOException e ) { }
+        catch ( IOException | NumberFormatException e ) { }
 
 
         s = "\nIntrepid adventurer, what doth thy call thyself? [pat]: ";
         System.out.print( s );
 
         try {
-            name = in.readLine();
+            String newname = in.readLine();
+
+            if ( ! newname.equals("") ) {
+                name = newname;
+            }
         }
-        catch ( IOException e ) { }
+        catch ( IOException | NullPointerException e ) { }
 
 
         System.out.println("\nGlorious adventurer, what class doth thy be?\n"
@@ -67,7 +71,7 @@ public class YoRPG {
         try {
             _class = Integer.parseInt(in.readLine());
         }
-        catch ( IOException e ) { }
+        catch ( IOException | NumberFormatException e ) { }
 
 
         //instantiate the player's character
@@ -88,7 +92,7 @@ public class YoRPG {
         }
 
         System.out.println("\n" + pat.about());
-		System.out.println("\n" + "---" + pat.getClass() + "---");
+        System.out.println("\n" + "---" + pat.getClass() + "---");
 
     }
 
@@ -148,34 +152,35 @@ public class YoRPG {
                 // If you land a hit, you incur greater damage,
                 // ...but if you get hit, you take more damage.
                 try {
-					if (_class != 2){
-						System.out.println( "\nDo you feel lucky? [1]" );
-						System.out.println( "\t1: Nay.\n\t2: Aye!" );
-					}
-					else{
-						System.out.println(" \nFireball or no Fireball? [1]" );
-						System.out.println( "\t1: Nay.\n\t2: Aye!");
-					}
+                    if ( _class != 2 ) {
+                        System.out.println( "\nDo you feel lucky? [1]" );
+                        System.out.println( "\t1: Nay.\n\t2: Aye!" );
+                    } else {
+                        System.out.println(" \nFireball or no Fireball? [1]" );
+                        System.out.println( "\t1: Nay.\n\t2: Aye!");
+                    }
                     i = Integer.parseInt( in.readLine() );
                 }
-                catch ( IOException e ) { }
+                catch ( IOException | NumberFormatException  e ) { }
 
                 if ( i == 2 )
                     pat.specialize();
-				else
-					pat.normalize();
+                else
+                    pat.normalize();
 
                 d1 = pat.attack( smaug );
                 d2 = smaug.attack( pat );
-				
-				if (_class == 2 && pat.getAttack() == 3.0){
-					if (Math.random() > .5)
-						System.out.println( "\n" + pat.getName() + " roasted the beast for " + d1 + " points of damage.");
-					else 
-						System.out.println( "\n" + pat.getName() + " blasted the beast for " + d1 + " points of damage.");
-				}
-				else
-					System.out.println( "\n" + pat.getName() + " dealt " + d1 + " points of damage.");
+
+                if (_class == 2 && pat.getAttack() == 3.0){
+                    if (Math.random() > .5)
+                        System.out.println( "\n" + pat.getName() + " roasted the beast for " + d1 + " points of damage.");
+                    else
+                        System.out.println( "\n" + pat.getName() + " blasted the beast for " + d1 + " points of damage.");
+                }
+                else {
+                    System.out.println( "\n" + pat.getName() + " dealt " + d1 + " points of damage.");
+                }
+
                 System.out.println( "Ye Olde Monster smacked " + pat.getName() + " for " + d2 + " points of damage.\n");
 
                 System.out.println(
