@@ -184,25 +184,71 @@ public class YoRPG {
                 System.out.println( "Ye Olde Monster smacked " + pat.getName() + " for " + d2 + " points of damage.\n");
 
                 System.out.println(
-                        properSpacing(
-                            pat.getName() + "'s health:",
-                            Integer.toString(pat.getHealth()),
-                            "Ye Olde Monster's health:",
-                            Integer.toString(smaug.getHealth()),
-                            5));
+				   properSpacing(
+						 pat.getName() + "'s health:",
+						 Integer.toString(pat.getHealth()),
+						 "Ye Olde Monster's health:",
+						 Integer.toString(smaug.getHealth()),
+						 5));
             }
 
             //option 1: you & the monster perish
             if ( !smaug.isAlive() && !pat.isAlive() ) {
                 System.out.println( "\n'Twas an epic battle, to be sure... " +
-                        "You cut ye olde monster down, but " +
-                        "with its dying breath ye olde monster " +
-                        "laid a fatal blow upon thy skull." );
+				    "You cut ye olde monster down, but " +
+				    "with its dying breath ye olde monster " +
+				    "laid a fatal blow upon thy skull." );
                 return false;
             }
             //option 2: you slay the beast
             else if ( !smaug.isAlive() ) {
                 System.out.println( "HuzzaaH! Ye olde monster hath been slain!" );
+
+		//purchasing potions to heal is only an option after you slay the beast
+		try{
+		    System.out.println("\nWould you like to purchase a poition to heal thyself?");
+		    System.out.println("\t1: Aye! \n\t2: Nay.");
+		    i = Integer.parseInt( in.readLine() );
+		}
+		
+		catch ( IOException e ) { }
+
+		if(i == 1){
+		    try{
+			System.out.println("\t1: Small Potions: 20 coins \n\t2: Medium Potions: 50 coins \n\t3: Large Potions: 100 coins");
+			System.out.println("Which one do you want?");
+			i = Integer.parseInt( in.readLine() );
+		    }
+
+		    catch (IOException e) { }
+
+		    if(i == 1){
+			pat.coins = pat.coins - 20;
+			pat.health = pat.health + 20;
+
+			System.out.println("Health: " + pat.health);
+			System.out.println("Coins: " + pat.coins);
+		    }
+		    else if(i == 2){
+			pat.coins = pat.coins - 50;
+			pat.health = pat.health + 50;
+			
+			System.out.println("\nHealth: " + pat.health);
+			System.out.println("Coins: " + pat.coins);			
+
+		    }
+		    else{
+			pat.coins = pat.coins - 100;
+			pat.health = pat.health + 100;
+			
+			System.out.println("Health: " + pat.health);
+			System.out.println("Coins: " + pat.coins);
+		    }
+		}
+		else{
+		    pat.coins = pat.coins;
+		}
+
                 return true;
             }
             //option 3: the beast slays you

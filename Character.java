@@ -13,6 +13,7 @@ public abstract class Character {
 
     protected int damage_dealt;
     protected int moves;
+    protected int coins = 0;
 
     public Character() {
         health = 200;
@@ -50,6 +51,10 @@ public abstract class Character {
         moves++;
         damage_dealt += damage;
         c.lowerHP(damage);
+	coins += damage_dealt;
+	if(!c.isAlive()){
+	    coins += 100;
+	}
         return damage;
     }
 
